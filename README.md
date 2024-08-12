@@ -1,4 +1,5 @@
-Django의 CBV를 활용하여 도서관 앱을 만들어 보았습니다.
+Django의 CBV를 활용하여 도서관 앱을 만들어 보았습니다.<br>
+ListView, DetailView, CreateView, UpdateView, DeleteView를 활용하였고, FBV와 CBV에 대한 비교, 설명과 어떤 상황에 사용하면 유용한지에 대해 설명하겠습니다.
 
 ## CBV(Class Based View)
 * FBV: 모든 재료를 직접 준비하고 요리하는 것과 같습니다. 각 재료의 양과 순서를 자유롭게 조절할 수 있지만, 모든 것을 직접 해야 하므로 시간이 더 걸릴 수 있습니다.
@@ -38,7 +39,7 @@ class AuthorListView(ListView):
 ```
 
 ## DetailView
-
+Django에서 상세 페이지를 구현할 때, FBV보다는 CBV의 DetailView를 사용하는 것이 훨씬 효율적이고 간결합니다. DetailView는 객체 조회, 예외 처리, 템플릿 렌더링을 자동으로 처리해주므로, 반복적인 코드를 줄이고 유지보수성을 높일 수 있습니다.
 ## CreateView
 
 ## UpdateView
