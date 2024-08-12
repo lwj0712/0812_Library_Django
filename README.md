@@ -5,6 +5,37 @@ Django의 CBV를 활용하여 도서관 앱을 만들어 보았습니다.
 * CBV: 미리 준비된 요리 레시피를 사용하는 것과 같습니다. 이미 검증된 레시피를 활용하되, 필요할 때는 레시피의 일부를 수정하거나 재료를 추가할 수 있습니다. 기본적인 준비 작업을 줄여주기 때문에 빠르고 효율적으로 요리를 완성할 수 있습니다.
 
 ## ListView
+ListView는 Django의 제네릭 뷰 중 하나로, 특정 모델의 객체 리스트를 쉽게 보여줄 수 있도록 도와줍니다.
+* FBV 사용 예시
+```python
+from django.shortcuts import render
+from .models import Book, Author
+
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, 'books/book_list.html', {'books': books})
+
+def author_list(request):
+    authors = Author.objects.all()
+    return render(request, 'authors/author_list.html', {'authors': authors})
+```
+* CBV 사용 예시
+```python
+from django.views.generic import ListView
+from .models import Book, Author
+
+class BookListView(ListView):
+    model = Book
+    template_name = 'books/book_list.html'
+    context_object_name = 'books'
+
+class AuthorListView(ListView):
+    model = Author
+    template_name = 'authors/author_list.html'
+    context_object_name = 'authors'
+```
+
+이처럼 CBV를 사용하면 이미 필요한 기능들이 추가 되어있어 구조가 더 간결하며 코드의 재사용성이 향상됩니다.
 
 ## DetailView
 
