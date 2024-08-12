@@ -1,4 +1,4 @@
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 from .models import Book
 
 class BookListView(ListView):
@@ -9,3 +9,8 @@ class BookListView(ListView):
 
 class MainView(TemplateView):
     template_name = 'main.html' # 랜더링할 템플릿 파일
+
+class BookDetailView(DetailView):
+    model = Book
+    template_name = 'books/book_detail.html'
+    context_object_name = 'book'

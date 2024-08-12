@@ -7,7 +7,7 @@
     <ul>
         {% for book in books %}
             <li>
-                <strong>{{ book.title }}</strong> - {{ book.author }} ({{ book.publication_date }})
+                <strong><a href="{% url 'books:book_detail' book.pk %}">{{ book.title }}</a></strong> - {{ book.author }} ({{ book.publication_date }})
             </li>
         {% endfor %}
     </ul>
