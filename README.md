@@ -1,5 +1,6 @@
 Django의 CBV를 활용하여 도서관 앱을 만들어 보았습니다.<br>
-ListView, DetailView, CreateView, UpdateView, DeleteView를 활용하였고, FBV와 CBV에 대한 비교, 설명과 어떤 상황에 사용하면 유용한지에 대해 설명하겠습니다.
+ListView, DetailView, CreateView, UpdateView, DeleteView를 활용하였고, <br>
+FBV와 CBV의 비교, 사용 된 CBV에 대한 간단한 설명과 어떤 상황에 사용하면 유용한지에 대해 알아보겠습니다.<br>
 
 ## CBV(Class Based View)
 * FBV: 모든 재료를 직접 준비하고 요리하는 것과 같습니다. 각 재료의 양과 순서를 자유롭게 조절할 수 있지만, 모든 것을 직접 해야 하므로 시간이 더 걸릴 수 있습니다.
