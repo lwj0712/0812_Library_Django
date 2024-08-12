@@ -1,0 +1,5 @@
+# Ignore the SQLite database file
+db.sqlite3
+
+# Ignore SQLite database migrations
+*.sqlite3-journal
