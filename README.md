@@ -35,7 +35,6 @@ class AuthorListView(ListView):
     context_object_name = 'authors'
 ```
 
-이처럼 CBV를 사용하면 이미 필요한 기능들이 추가 되어있어 구조가 더 간결하며 코드의 재사용성이 향상됩니다.
 **반복적인 목록 페이지를 구현 할 때는 CBV의 ListView를 활용하는 것이 효율적입니다.**
 
 ## DetailView
