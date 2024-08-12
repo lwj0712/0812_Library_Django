@@ -16,7 +16,7 @@
 - ListView는 Django의 제네릭 뷰 중 하나로, 특정 모델의 객체 리스트를 쉽게 보여줄 수 있도록 도와줍니다.
 - 반복적인 목록 페이지를 구현 할 때는 CBV의 ListView를 활용하는 것이 효율적입니다.
 
-- FBV 사용 예시
+FBV 사용 예시
 ```python
 from django.shortcuts import render
 from .models import Book, Author
@@ -30,7 +30,7 @@ def author_list(request):
     return render(request, 'authors/author_list.html', {'authors': authors})
 ```
 
-- CBV 사용 예시
+CBV 사용 예시
 ```python
 from django.views.generic import ListView
 from .models import Book, Author
@@ -52,7 +52,7 @@ class AuthorListView(ListView):
 - Django에서 상세 페이지를 구현할 때, FBV보다는 CBV의 DetailView를 사용하는 것이 훨씬 효율적이고 간결합니다.
 - DetailView는 객체 조회, 예외 처리, 템플릿 렌더링을 자동으로 처리해주므로, 반복적인 코드를 줄이고 유지보수성을 높일 수 있습니다.
 
-- FBV 사용 예시
+FBV 사용 예시
 ```python
 from django.shortcuts import render, get_object_or_404
 from .models import Book
@@ -62,7 +62,7 @@ def book_detail(request, pk):
     return render(request, 'books/book_detail.html', {'book': book})
 ```
 
-- CBV 사용 예시
+CBV 사용 예시
 ```python
 from django.views.generic import DetailView
 from .models import Book
@@ -80,7 +80,7 @@ class BookDetailView(DetailView):
 - CreateView*는 Django의 제네릭 뷰 중 하나로, 새로운 객체를 생성하기 위한 폼을 제공하고, 이 폼의 제출을 처리하는 데 사용됩니다.
 - CreateView는 특정 모델과 연동된 폼을 자동으로 생성하고, 폼의 유효성 검사 및 객체 저장 로직을 처리하여 개발자가 일일이 이를 작성할 필요가 없도록 합니다.
 
-- FBV 사용 예시
+FBV 사용 예시
 ```python
 from django.shortcuts import render, redirect
 from .forms import BookForm
@@ -96,7 +96,7 @@ def create_book(request):
     return render(request, 'books/book_form.html', {'form': form})
 ```
 
-- CBV 사용 예시
+CBV 사용 예시
 ```python
 from django.views.generic import CreateView
 from .models import Book
@@ -115,7 +115,7 @@ class BookCreateView(CreateView):
 
 ## UpdateView
 
-* FBV 사용 예시
+FBV 사용 예시
 ```python
 from django.shortcuts import render
 from .models import Book, Author
@@ -128,7 +128,7 @@ def author_list(request):
     authors = Author.objects.all()
     return render(request, 'authors/author_list.html', {'authors': authors})
 ```
-* CBV 사용 예시
+CBV 사용 예시
 ```python
 from django.views.generic import ListView
 from .models import Book, Author
@@ -148,7 +148,7 @@ class AuthorListView(ListView):
 
 ## DeleteView
 
-* FBV 사용 예시
+FBV 사용 예시
 ```python
 from django.shortcuts import render
 from .models import Book, Author
@@ -161,7 +161,7 @@ def author_list(request):
     authors = Author.objects.all()
     return render(request, 'authors/author_list.html', {'authors': authors})
 ```
-* CBV 사용 예시
+CBV 사용 예시
 ```python
 from django.views.generic import ListView
 from .models import Book, Author
