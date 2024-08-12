@@ -4,11 +4,31 @@
 
 {% block content %}
     <h2>도서 목록</h2>
+    <a href="{% url 'books:book_create' %}">새 도서 추가</a>
     <ul>
         {% for book in books %}
             <li>
-                <strong><a href="{% url 'books:book_detail' book.pk %}">{{ book.title }}</a></strong> - {{ book.author }} ({{ book.publication_date }})
+                <strong><a href="{% url 'books:book_detail' book.pk %}">{{ book.title }}</a></strong> - {{ book.author }} ({{ book.publication_date|date:"Y-m-d" }})
             </li>
         {% endfor %}
     </ul>
+
+    <!-- 페이지네이션 링크 추가 -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; 처음</a>
+                <a href="?page={{ page_obj.previous_page_number }}">이전</a>
+            {% endif %}
+
+            <span class="current">
+                페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">다음</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">마지막 &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}

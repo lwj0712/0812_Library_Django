@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}도서 추가{% endblock %}
+
+{% block content %}
+    <h2>도서 추가</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">저장</button>
+    </form>
+    <a href="{% url 'books:book_list' %}">도서 목록으로 돌아가기</a>
+{% endblock %}
