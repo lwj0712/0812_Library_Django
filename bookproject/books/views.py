@@ -1,5 +1,5 @@
 from django.views.generic import ListView, TemplateView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Book
 from .forms import BookForm
@@ -10,7 +10,7 @@ class BookListView(ListView):
     template_name = 'books/book_list.html' # 랜더링할 템플릿 파일! 
     context_object_name = 'books' # 컨텍스트 객체 이름! 기본적으로 object_list를 사용함 books 변경
     ordering = ['-publication_date'] # 출판일 기준 내림차순으로 정렬
-    paginate_by = 2 # 페이지네이션 기능을 사용하고 한 페이지에 2개의 객체를 보여줌
+    paginate_by = 3 # 페이지네이션 기능을 사용하고 한 페이지에 2개의 객체를 보여줌
 
 class MainView(TemplateView):
     template_name = 'main.html' # 랜더링할 템플릿 파일
@@ -41,3 +41,8 @@ class BookUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('books:book_detail', kwargs={'pk': self.object.pk})
+    
+class BookDeleteView(DeleteView):
+    model = Book
+    template_name = 'books/book_confirm_delete.html'
+    success_url = reverse_lazy('books:book_list') # 성공시 이동할 페이지

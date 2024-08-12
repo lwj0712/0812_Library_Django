@@ -3,10 +3,14 @@
 {% block title %}{{ book.title }} - 상세 정보{% endblock %}
 
 {% block content %}
-    <h1>{{ book.title }}</h1>
+    <h2>{{ book.title }}</h2>
     <p><strong>저자:</strong> {{ book.author }}</p>
-    <p><strong>출판일:</strong> {{ book.publication_date }}</p>
+    <p><strong>출판일:</strong> {{ book.publication_date|date:"Y-m-d" }}</p>
+    <p><strong>장르:</strong> {{ book.genre }}</p>
+    <p><strong>요약:</strong> {{ book.summary }}</p>
     <a href="{% url 'books:book_update' book.pk %}">도서 정보 수정</a>
     <br>
-    <a href="{% url 'books:book_list' %}">목록으로 돌아가기</a>
+    <a href="{% url 'books:book_delete' book.pk %}">도서 삭제</a>
+    <br>
+    <a href="{% url 'books:book_list' %}">도서 목록으로 돌아가기</a>
 {% endblock %}
