@@ -1,5 +1,5 @@
 from django.views.generic import ListView, TemplateView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 from .models import Book
 from .forms import BookForm
@@ -33,3 +33,11 @@ class BookCreateView(CreateView):
     success_url = reverse_lazy('books:book_list') # 성공시 이동할 페이지
     # reverse_lazy -> URL 이름을 지연해서 평가 -> 뷰가 로드된 다음에 URL을 생성
     # 뷰가 로드 되기 전에 URL이 사용되는 상황에서 유용하다. -> 안전하게 URL을 참조하는 기능
+
+class BookUpdateView(UpdateView):
+    model = Book
+    form_class = BookForm
+    template_name = 'books/book_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('books:book_detail', kwargs={'pk': self.object.pk})

@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
-{% block title %}도서 추가{% endblock %}
+{% block title %}
+    {# 만약 view.object.pk 존재하면 도서 정보 수정, 존재하지 않다면 도서 추가#}
+    {% if view.object.pk %}도서 정보 수정{% else %}도서 추가{% endif %}
+{% endblock %}
 
 {% block content %}
-    <h2>도서 추가</h2>
+    <h2>
+        {% if view.object.pk %}도서 정보 수정{% else %}도서 추가{% endif %}
+    </h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">저장</button>
+        <button type="submit">
+            {% if view.object.pk %}수정{% else %}추가{% endif %}
+        </button>
     </form>
     <a href="{% url 'books:book_list' %}">도서 목록으로 돌아가기</a>
 {% endblock %}

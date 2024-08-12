@@ -6,5 +6,7 @@
     <h1>{{ book.title }}</h1>
     <p><strong>저자:</strong> {{ book.author }}</p>
     <p><strong>출판일:</strong> {{ book.publication_date }}</p>
+    <a href="{% url 'books:book_update' book.pk %}">도서 정보 수정</a>
+    <br>
     <a href="{% url 'books:book_list' %}">목록으로 돌아가기</a>
 {% endblock %}
