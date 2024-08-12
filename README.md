@@ -77,7 +77,7 @@ class BookDetailView(DetailView):
 <br>
 
 ## CreateView
-- CreateView*는 Django의 제네릭 뷰 중 하나로, 새로운 객체를 생성하기 위한 폼을 제공하고, 이 폼의 제출을 처리하는 데 사용됩니다.
+- CreateView는 Django의 제네릭 뷰 중 하나로, 새로운 객체를 생성하기 위한 폼을 제공하고, 이 폼의 제출을 처리하는 데 사용됩니다.
 - CreateView는 특정 모델과 연동된 폼을 자동으로 생성하고, 폼의 유효성 검사 및 객체 저장 로직을 처리하여 개발자가 일일이 이를 작성할 필요가 없도록 합니다.
 
 FBV 사용 예시
