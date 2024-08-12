@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}도서 관리 시스템{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>도서 관리 시스템</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'main' %}">홈</a></li>
+                <li><a href="{% url 'books:book_list' %}">도서 목록</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        <!-- 여기에 개별 페이지의 내용이 추가됩니다 -->
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 도서 관리 시스템</p>
+    </footer>
+</body>
+</html>

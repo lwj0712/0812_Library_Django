@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}도서 목록{% endblock %}
+
+{% block content %}
+    <h2>도서 목록</h2>
+    <ul>
+        {% for book in books %}
+            <li>
+                <strong>{{ book.title }}</strong> - {{ book.author }} ({{ book.publication_date }})
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
