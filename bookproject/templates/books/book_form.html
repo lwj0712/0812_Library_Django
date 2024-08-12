@@ -9,12 +9,10 @@
     <h2>
         {% if view.object.pk %}도서 정보 수정{% else %}도서 추가{% endif %}
     </h2>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">
-            {% if view.object.pk %}수정{% else %}추가{% endif %}
-        </button>
-    </form>
+        <button type="submit">저장</button>
+    </form>   
     <a href="{% url 'books:book_list' %}">도서 목록으로 돌아가기</a>
 {% endblock %}
