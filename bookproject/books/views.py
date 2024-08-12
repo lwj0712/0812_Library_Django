@@ -10,7 +10,7 @@ class BookListView(ListView):
     template_name = 'books/book_list.html' # 랜더링할 템플릿 파일! 
     context_object_name = 'books' # 컨텍스트 객체 이름! 기본적으로 object_list를 사용함 books 변경
     ordering = ['-publication_date'] # 출판일 기준 내림차순으로 정렬
-    paginate_by = 3 # 페이지네이션 기능을 사용하고 한 페이지에 2개의 객체를 보여줌
+    paginate_by = 5 # 페이지네이션 기능을 사용하고 한 페이지에 2개의 객체를 보여줌
 
 class MainView(TemplateView):
     template_name = 'main.html' # 랜더링할 템플릿 파일
