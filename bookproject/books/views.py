@@ -12,6 +12,32 @@ class BookListView(ListView):
     ordering = ['-publication_date'] # 출판일 기준 내림차순으로 정렬
     paginate_by = 5 # 페이지네이션 기능을 사용하고 한 페이지에 2개의 객체를 보여줌
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q') # q는 query의 약자
+        if query:
+            queryset = queryset.filter(title__icontains=query)
+
+        # 정렬 조건을 처리
+        sort = self.request.GET.get('sort')
+        if sort == 'title':
+            queryset = queryset.order_by('title')
+        elif sort == 'author':
+            queryset = queryset.order_by('author')
+        elif sort == 'date':
+            queryset = queryset.order_by('-publication_date')  # 최신 순으로 정렬
+        else:
+            queryset = queryset.order_by('-publication_date')  # 기본 정렬: 최신 순
+        
+        # 필터링 기능을 처리
+        genre = self.request.GET.get('genre')
+        if genre:
+            queryset = queryset.filter(genre=genre)
+
+        return queryset
+    
+    # https://yourdomain.com/books/?q=검색어 형식
+
 class MainView(TemplateView):
     template_name = 'main.html' # 랜더링할 템플릿 파일
 
