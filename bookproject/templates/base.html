@@ -12,6 +12,19 @@
             <ul>
                 <li><a href="{% url 'main' %}">홈</a></li>
                 <li><a href="{% url 'books:book_list' %}">도서 목록</a></li>
+                {% if user.is_authenticated %}
+                    <li>환영합니다, {{ user.username }}님!</li>
+                    <li>
+                        <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                로그아웃
+                            </button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">로그인</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>

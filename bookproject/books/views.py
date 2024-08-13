@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Book
 from .forms import BookForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class BookListView(ListView):
@@ -52,23 +53,24 @@ class BookDetailView(DetailView):
     template_name = 'books/book_detail.html' # 랜더링할 템플릿 파일
     context_object_name = 'book' # 컨텍스트 객체 이름! 기본적으로 object를 사용함 book 변경
     
-class BookCreateView(CreateView):
-    model = Book 
+class BookCreateView(LoginRequiredMixin, CreateView):
+    model = Book
     form_class = BookForm
     template_name = 'books/book_form.html'
     success_url = reverse_lazy('books:book_list') # 성공시 이동할 페이지
     # reverse_lazy -> URL 이름을 지연해서 평가 -> 뷰가 로드된 다음에 URL을 생성
     # 뷰가 로드 되기 전에 URL이 사용되는 상황에서 유용하다. -> 안전하게 URL을 참조하는 기능
 
-class BookUpdateView(UpdateView):
+class BookUpdateView(LoginRequiredMixin, UpdateView):
     model = Book
     form_class = BookForm
     template_name = 'books/book_form.html'
+    success_url = reverse_lazy('books:book_detail')
 
     def get_success_url(self):
         return reverse_lazy('books:book_detail', kwargs={'pk': self.object.pk})
     
-class BookDeleteView(DeleteView):
+class BookDeleteView(LoginRequiredMixin, DeleteView):
     model = Book
     template_name = 'books/book_confirm_delete.html'
     success_url = reverse_lazy('books:book_list') # 성공시 이동할 페이지
