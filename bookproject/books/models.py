@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Book(models.Model):
     title = models.CharField(max_length=100, verbose_name='제목')
@@ -14,3 +15,12 @@ class Book(models.Model):
     class Meta:
         verbose_name = '도서' # 모델의 단수 표현
         verbose_name_plural = '도서들' # 모델의 복수 표현
+
+class Rental(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='대여 도서')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='대여자')
+    rental_date = models.DateField(auto_now_add=True, verbose_name='대여일')
+    return_date = models.DateField(verbose_name='반납일', null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.user}님이 {self.book}을 대여함"

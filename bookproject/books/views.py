@@ -1,8 +1,8 @@
 from django.views.generic import ListView, TemplateView, DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
 from .models import Book
-from .forms import BookForm
+from .forms import BookForm, RentalForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .forms import CustomUserCreationForm
 from .mixins import GroupRequiredMixin
@@ -83,3 +83,17 @@ class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     template_name = 'registration/signup.html'
     success_url = reverse_lazy('login') # 성공시 이동할 페이지
+
+class RentalInfoView(TemplateView):
+    template_name = 'books/rental_info.html'
+
+class BookRentalView(LoginRequiredMixin, FormView):
+    template_name = 'books/book_rental.html'
+    form_class = RentalForm
+    success_url = reverse_lazy('books:rental_success')  # 네임스페이스와 함께 사용
+
+    def form_valid(self, form):
+        rental = form.save(commit=False)
+        rental.user = self.request.user  # 로그인된 사용자를 할당
+        rental.save()
+        return super().form_valid(form)

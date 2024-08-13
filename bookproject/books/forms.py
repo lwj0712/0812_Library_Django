@@ -1,5 +1,5 @@
 from django import forms
-from .models import Book
+from .models import Book, Rental
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -33,3 +33,12 @@ class CustomUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+    
+class RentalForm(forms.ModelForm):
+    class Meta:
+        model = Rental
+        fields = ['book', 'return_date']
+        widgets = {
+            'return_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+        }
