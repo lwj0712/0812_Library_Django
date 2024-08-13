@@ -3,8 +3,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Book
 from .forms import BookForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .forms import CustomUserCreationForm
+from .mixins import GroupRequiredMixin
 
 # Create your views here.
 class BookListView(ListView):
@@ -62,19 +63,21 @@ class BookCreateView(LoginRequiredMixin, CreateView):
     # reverse_lazy -> URL 이름을 지연해서 평가 -> 뷰가 로드된 다음에 URL을 생성
     # 뷰가 로드 되기 전에 URL이 사용되는 상황에서 유용하다. -> 안전하게 URL을 참조하는 기능
 
-class BookUpdateView(LoginRequiredMixin, UpdateView):
+class BookUpdateView(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     model = Book
     form_class = BookForm
     template_name = 'books/book_form.html'
     success_url = reverse_lazy('books:book_detail')
+    group_name = 'Editor'
 
     def get_success_url(self):
         return reverse_lazy('books:book_detail', kwargs={'pk': self.object.pk})
     
-class BookDeleteView(LoginRequiredMixin, DeleteView):
+class BookDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Book
     template_name = 'books/book_confirm_delete.html'
     success_url = reverse_lazy('books:book_list') # 성공시 이동할 페이지
+    permission_required = 'books/delete_book' # 권한이 필요한 경우 지정
 
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
