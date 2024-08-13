@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from .models import Book
 from .forms import BookForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import CustomUserCreationForm
 
 # Create your views here.
 class BookListView(ListView):
@@ -74,3 +75,8 @@ class BookDeleteView(LoginRequiredMixin, DeleteView):
     model = Book
     template_name = 'books/book_confirm_delete.html'
     success_url = reverse_lazy('books:book_list') # 성공시 이동할 페이지
+
+class SignUpView(CreateView):
+    form_class = CustomUserCreationForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login') # 성공시 이동할 페이지
