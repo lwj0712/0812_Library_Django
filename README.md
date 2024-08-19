@@ -1,7 +1,7 @@
 # Django CBV를 활용한 도서관 앱 README
 
 - Django로 개발한 도서관 앱 입니다.
-- 수업 시간에 배운 CBV를 활용하여 개발하였습니다.
+- Django CBV를 활용하여 개발하였습니다.
   
 <br>
 
